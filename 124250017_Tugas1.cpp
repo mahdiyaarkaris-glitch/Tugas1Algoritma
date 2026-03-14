@@ -25,7 +25,7 @@ void bacaFile(dataFilm film[], int &jumlah){
 	}
 	
 	//buat baca file sampe akhir
-	while (fscanf(file_film, "%[^;];%d;%d;%f\n", film[i].judul, &film[i].harga, &film[i].tahun, &film[i].rating) != EOF){
+	while (fscanf(file_film, " %[^;];%d;%d;%f\n", film[i].judul, &film[i].harga, &film[i].tahun, &film[i].rating) != EOF){
 		i++;
 	}
 	fclose(file_film);
@@ -186,8 +186,9 @@ int main(){
 		cout << "[1] Lihat Katalog Film\n";
 		cout << "[2] Urutkan Rating (Quick Sort)\n";
 		cout <<"[3] Urutkan Abjad (Bubble Sort)\n";
-		cout <<"[4] Cari Film\n";
-		cout <<"[5] Tambah Film Baru\n";
+		cout <<"[4] Cari Film (Linear Search)\n";
+		cout <<"[5] Cari Film (Binary Search)\n";
+		cout <<"[6] Tambah Film Baru\n";
 		cout <<"[0] Keluar & Simpan\n";
 		cout <<"============================================\n";
 		cout <<"Pilih Menu : ";
@@ -214,18 +215,24 @@ int main(){
 			cin.get();
 		}
 		else if( menu == 4){ //linear search
-			if ( jumlah < 30 ){
-				cout <<"\nLinear Search\n";
-				linearSearch(film,  jumlah);
+			if ( jumlah >= 30 ){
+				cout <<"Gunakan Binary Search jika data lebih atau sama dengan 30 film\n";
 			} else {
-				cout << "\nBinary Search\n";
-				bubbleSort(film, jumlah);
+				linearSearch(film,  jumlah);
+			}
+			cout <<"\nTekan Enter untuk melanjutkan...";
+			cin.get();
+		} else if (menu == 5){
+			if (jumlah < 30){
+				cout <<"Jumlah film kurang dari 10. Gunakan linear search.\n";
+			} else {
 				binary(film,jumlah);
 			}
 			cout <<"\nTekan Enter untuk melanjutkan...";
 			cin.get();
 		}
-		else if(menu== 5){ //menu tambah film
+		
+		else if(menu== 6){ //menu tambah film
 			tambahFilm(film,jumlah);
 			cout <<"\nTekan Enter untuk melanjutkan...";
 			cin.get();
